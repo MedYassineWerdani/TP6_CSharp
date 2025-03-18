@@ -36,16 +36,14 @@
             buttonModifier = new Button();
             buttonAjouter = new Button();
             dataGridViewListe = new DataGridView();
-            bindingSourceListe = new BindingSource(components);
-            categoryBindingSource = new BindingSource(components);
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             recipesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            categoryBindingSource = new BindingSource(components);
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewListe).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bindingSourceListe).BeginInit();
             ((System.ComponentModel.ISupportInitialize)categoryBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -152,10 +150,6 @@
             dataGridViewListe.Size = new Size(794, 374);
             dataGridViewListe.TabIndex = 1;
             // 
-            // categoryBindingSource
-            // 
-            categoryBindingSource.DataSource = typeof(Data.Entities.Category);
-            // 
             // idDataGridViewTextBoxColumn
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
@@ -192,6 +186,10 @@
             recipesDataGridViewTextBoxColumn.ReadOnly = true;
             recipesDataGridViewTextBoxColumn.Width = 125;
             // 
+            // categoryBindingSource
+            // 
+            categoryBindingSource.DataSource = typeof(Data.Entities.Category);
+            // 
             // CategoriesListForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -204,7 +202,6 @@
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewListe).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bindingSourceListe).EndInit();
             ((System.ComponentModel.ISupportInitialize)categoryBindingSource).EndInit();
             ResumeLayout(false);
         }
@@ -217,7 +214,6 @@
         private Button buttonModifier;
         private Button buttonAjouter;
         private DataGridView dataGridViewListe;
-        private BindingSource bindingSourceListe;
         private Button buttonActualiser;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;

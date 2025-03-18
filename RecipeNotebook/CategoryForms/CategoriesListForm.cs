@@ -17,7 +17,7 @@ namespace RecipeNotebook.CategoryForms
         private CategoryDetailsForm _categoryDetailsForm;
         private IServiceProvider _serviceProvider;
 
-        public CategoriesListForm(CategoryDetailsForm categoryDetailsForm , IServiceProvider serviceProvider)
+        public CategoriesListForm(CategoryDetailsForm categoryDetailsForm, IServiceProvider serviceProvider)
         {
             _categoryDetailsForm = categoryDetailsForm;
             _serviceProvider = serviceProvider;
@@ -31,7 +31,13 @@ namespace RecipeNotebook.CategoryForms
 
         private void CategoriesListForm_Load(object sender, EventArgs e)
         {
-            var repoCategory = _serviceProvider.GetRequiredService<CategoryRepository>();
+            using (var repoCategory = _serviceProvider.GetRequiredService<CategoryRepository>())
+            {
+                categoryBindingSource.DataSource = repoCategory.GetAll();
+            }
         }
+
+
+
     }
 }
