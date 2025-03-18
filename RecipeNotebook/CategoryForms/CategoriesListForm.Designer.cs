@@ -31,16 +31,22 @@
             components = new System.ComponentModel.Container();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
+            buttonActualiser = new Button();
             buttonSupprimer = new Button();
             buttonModifier = new Button();
             buttonAjouter = new Button();
             dataGridViewListe = new DataGridView();
             bindingSourceListe = new BindingSource(components);
-            buttonActualiser = new Button();
+            categoryBindingSource = new BindingSource(components);
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            recipesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewListe).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceListe).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)categoryBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -76,6 +82,19 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Size = new Size(794, 64);
             tableLayoutPanel2.TabIndex = 0;
+            // 
+            // buttonActualiser
+            // 
+            buttonActualiser.Dock = DockStyle.Fill;
+            buttonActualiser.Font = new Font("Segoe UI", 9.07563F, FontStyle.Bold);
+            buttonActualiser.Image = Properties.Resources.reload_icon;
+            buttonActualiser.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonActualiser.Location = new Point(597, 3);
+            buttonActualiser.Name = "buttonActualiser";
+            buttonActualiser.Size = new Size(194, 58);
+            buttonActualiser.TabIndex = 4;
+            buttonActualiser.Text = "Actualiser";
+            buttonActualiser.UseVisualStyleBackColor = true;
             // 
             // buttonSupprimer
             // 
@@ -119,26 +138,59 @@
             // 
             // dataGridViewListe
             // 
+            dataGridViewListe.AllowUserToAddRows = false;
+            dataGridViewListe.AllowUserToDeleteRows = false;
+            dataGridViewListe.AutoGenerateColumns = false;
             dataGridViewListe.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewListe.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, recipesDataGridViewTextBoxColumn });
+            dataGridViewListe.DataSource = categoryBindingSource;
             dataGridViewListe.Dock = DockStyle.Fill;
             dataGridViewListe.Location = new Point(3, 3);
             dataGridViewListe.Name = "dataGridViewListe";
+            dataGridViewListe.ReadOnly = true;
             dataGridViewListe.RowHeadersWidth = 51;
             dataGridViewListe.Size = new Size(794, 374);
             dataGridViewListe.TabIndex = 1;
             // 
-            // buttonActualiser
+            // categoryBindingSource
             // 
-            buttonActualiser.Dock = DockStyle.Fill;
-            buttonActualiser.Font = new Font("Segoe UI", 9.07563F, FontStyle.Bold);
-            buttonActualiser.Image = Properties.Resources.reload_icon;
-            buttonActualiser.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonActualiser.Location = new Point(597, 3);
-            buttonActualiser.Name = "buttonActualiser";
-            buttonActualiser.Size = new Size(194, 58);
-            buttonActualiser.TabIndex = 4;
-            buttonActualiser.Text = "Actualiser";
-            buttonActualiser.UseVisualStyleBackColor = true;
+            categoryBindingSource.DataSource = typeof(Data.Entities.Category);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.MinimumWidth = 6;
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
+            nameDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            descriptionDataGridViewTextBoxColumn.MinimumWidth = 6;
+            descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            descriptionDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // recipesDataGridViewTextBoxColumn
+            // 
+            recipesDataGridViewTextBoxColumn.DataPropertyName = "Recipes";
+            recipesDataGridViewTextBoxColumn.HeaderText = "Recipes";
+            recipesDataGridViewTextBoxColumn.MinimumWidth = 6;
+            recipesDataGridViewTextBoxColumn.Name = "recipesDataGridViewTextBoxColumn";
+            recipesDataGridViewTextBoxColumn.ReadOnly = true;
+            recipesDataGridViewTextBoxColumn.Width = 125;
             // 
             // CategoriesListForm
             // 
@@ -148,10 +200,12 @@
             Controls.Add(tableLayoutPanel1);
             Name = "CategoriesListForm";
             Text = "Liste des Catégories";
+            Load += CategoriesListForm_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewListe).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceListe).EndInit();
+            ((System.ComponentModel.ISupportInitialize)categoryBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -165,5 +219,10 @@
         private DataGridView dataGridViewListe;
         private BindingSource bindingSourceListe;
         private Button buttonActualiser;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn recipesDataGridViewTextBoxColumn;
+        private BindingSource categoryBindingSource;
     }
 }

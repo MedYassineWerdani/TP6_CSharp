@@ -11,8 +11,8 @@ using RecipeNotebook.Data.Context;
 namespace RecipeNotebook.Data.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    [Migration("20250311102641_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250318101523_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,6 @@ namespace RecipeNotebook.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -50,11 +49,9 @@ namespace RecipeNotebook.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Instructions")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<TimeSpan>("PreparationTime")

@@ -24,7 +24,6 @@ namespace RecipeNotebook.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -47,11 +46,9 @@ namespace RecipeNotebook.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Instructions")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<TimeSpan>("PreparationTime")
