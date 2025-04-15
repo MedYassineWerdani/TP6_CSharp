@@ -88,6 +88,7 @@ namespace RecipeNotebook.RecipeForms
         {
             var repo = _serviceProvider.GetRequiredService<RecipeRepository>();
             recipeBindingSource.DataSource = repo.GetAll();
+            categoryBindingSource.DataSource = getCategories();
         }
     }
 }

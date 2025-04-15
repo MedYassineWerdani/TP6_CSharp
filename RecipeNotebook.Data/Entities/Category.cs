@@ -21,5 +21,10 @@ namespace RecipeNotebook.Data.Entities
         public string Description { get; set; }
 
         public ICollection<Recipe> Recipes { get; set; }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }
