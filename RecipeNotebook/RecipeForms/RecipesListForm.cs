@@ -1,22 +1,83 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
+using RecipeNotebook.Data.Repositories;
 
 namespace RecipeNotebook.RecipeForms
 {
-    public partial class RecipesListForm: Form
+    public partial class RecipesListForm : Form
     {
-        private RecipeDetailsForm _recipeDetailsForm;
-        public RecipesListForm(RecipeDetailsForm recipeDetailsForm)
+        private readonly IServiceProvider _serviceProvider;
+
+        public RecipesListForm(IServiceProvider serviceProvider)
         {
-            _recipeDetailsForm = recipeDetailsForm;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
+        }
+
+        private void RecipesListForm_Load(object sender, EventArgs e)
+        {
+            ReloadData();
+        }
+
+        private void buttonActualiser_Click(object sender, EventArgs e)
+        {
+            ReloadData();
+        }
+
+        private void buttonAjouter_Click(object sender, EventArgs e)
+        {
+            var newRecipe = new Data.Entities.Recipe();
+            var dialogForm = new RecipeDetailsForm(newRecipe);
+            var dialogResult = dialogForm.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+                var repo = _serviceProvider.GetRequiredService<RecipeRepository>();
+                repo.Add(newRecipe);
+                ReloadData();
+            }
+        }
+
+        private void buttonModifier_Click(object sender, EventArgs e)
+        {
+            var recipe = recipeBindingSource.Current as Data.Entities.Recipe;
+            if (recipe != null)
+            {
+                var dialogForm = new RecipeDetailsForm(recipe);
+                var dialogResult = dialogForm.ShowDialog();
+
+                if (dialogResult == DialogResult.OK)
+                {
+                    var repo = _serviceProvider.GetRequiredService<RecipeRepository>();
+                    repo.Update(recipe);
+                    ReloadData();
+                }
+            }
+        }
+
+        private void buttonSupprimer_Click(object sender, EventArgs e)
+        {
+            var recipe = recipeBindingSource.Current as Data.Entities.Recipe;
+            if (recipe != null)
+            {
+                var dialogResult = MessageBox.Show(
+                    $"Are you sure you want to delete the recipe: '{recipe.Title}'?",
+                    "Validation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    var repo = _serviceProvider.GetRequiredService<RecipeRepository>();
+                    repo.Delete(recipe.Id);
+                    ReloadData();
+                }
+            }
+        }
+
+        public void ReloadData()
+        {
+            var repo = _serviceProvider.GetRequiredService<RecipeRepository>();
+            recipeBindingSource.DataSource = repo.GetAll();
         }
     }
 }

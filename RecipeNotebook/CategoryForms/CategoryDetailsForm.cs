@@ -12,9 +12,11 @@ namespace RecipeNotebook.CategoryForms
 {
     public partial class CategoryDetailsForm : Form
     {
-        public CategoryDetailsForm()
+        public CategoryDetailsForm(Data.Entities.Category category)
         {
             InitializeComponent();
+            categoryBindingSource.DataSource = category;
         }
+
     }
 }

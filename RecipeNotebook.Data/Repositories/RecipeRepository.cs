@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RecipeNotebook.Data.Repositories
 {
-    public class RecipeRepository
+    public class RecipeRepository : IDisposable
     {
         private readonly RecipeContext _context;
 
@@ -44,6 +44,11 @@ namespace RecipeNotebook.Data.Repositories
                 _context.Recipes.Remove(recipe);
                 _context.SaveChanges();
             }
+        }
+
+        public void Dispose()
+        {
+            //throw new NotImplementedException();
         }
     }
 }
